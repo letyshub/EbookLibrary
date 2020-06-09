@@ -18,6 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Install dependencies
+      env:
+        DOTNET_CLI_TELEMETRY_OPTOUT: 1
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
