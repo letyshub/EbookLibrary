@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="EbookLibrary.Views.AddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:EbookLibrary.Views"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Content="ADD EBOOK" Grid.Row="0" Background="#FF673AB7" Foreground="White" VerticalAlignment="Stretch" FontSize="36" FontFamily="Cambria" />
+        <TextBox x:Name="Title"
+                 materialDesign:HintAssist.Hint="Title"
+                 Margin="10,0,0,0"
+                 Grid.Row="1"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                 materialDesign:HintAssist.FloatingScale="0.50"
+                 FontSize="20"
+                 Width="760"
+                 HorizontalAlignment="Left">
+            <TextBox.Text>
+                <Binding Path="Title" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <el:RequiredRule ValidatesOnTargetUpdated="False" ValidationStep="UpdatedValue" xmlns:el="clr-namespace:EbookLibrary" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="Author"
+                 materialDesign:HintAssist.Hint="Author"
+                 Margin="10,0,0,0"
+                 Grid.Row="2"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                 materialDesign:HintAssist.FloatingScale="0.50"
+                 FontSize="20"
+                 Width="760"
+                 HorizontalAlignment="Left"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10,0,0,0">
+            <TextBox x:Name="Path"
+                     materialDesign:HintAssist.Hint="Path"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                     materialDesign:HintAssist.FloatingScale="0.50"
+                     FontSize="20"
+                     Width="660">
+                <TextBox.Text>
+                    <Binding Path="Path" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <el:RequiredRule ValidatesOnTargetUpdated="False"  ValidationStep="UpdatedValue"  xmlns:el="clr-namespace:EbookLibrary" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Button cal:Message.Attach="SelectFile" Content="{materialDesign:PackIcon FolderOpen}" ToolTip="Select ebook" Margin="0,0,1,0" />
+            <Button cal:Message.Attach="OpenFile" Content="{materialDesign:PackIcon BookOpenVariant}" ToolTip="Open ebook" Cursor="Hand" Margin="0,0,1,0" />
+        </StackPanel>
+        <TextBox x:Name="Tags"
+                 materialDesign:HintAssist.Hint="Tags"
+                 Margin="10,0,0,0"
+                 Grid.Row="4"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                 materialDesign:HintAssist.FloatingScale="0.50"
+                 FontSize="20"
+                 Width="760"
+                 HorizontalAlignment="Left"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Right">
+            <Button x:Name="Save"
+                    cal:Message.Attach="Save"
+                    Content="SAVE"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Foreground="#FF673AB7" />
+            <Button
+                Content="CANCEL"
+                cal:Message.Attach="Cancel"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Foreground="#DD060606" />
+        </StackPanel>
+    </Grid>
+</UserControl>
