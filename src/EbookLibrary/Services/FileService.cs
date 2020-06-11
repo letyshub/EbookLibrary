@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EbookLibrary.Extensions;
+using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -28,7 +29,7 @@ namespace EbookLibrary
         {
             var fi = new FileInfo(path);
             var filename = Guid.NewGuid().ToString();
-            var folder = $"{Properties.EbookLibrary.Default.EbooksFolder}\\{DateTime.Now.ToString("YYYY_MM_DD")}";
+            var folder = $"{Properties.EbookLibrary.Default.EbooksFolder}\\{DateTime.Now.ToFolderName()}";
             var storedEbookPath = $"{folder}\\{filename}.{fi.Extension}";
 
             if (!Directory.Exists(folder))

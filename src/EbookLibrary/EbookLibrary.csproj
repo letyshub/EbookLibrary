@@ -12,6 +12,8 @@
     <Product />
     <Description></Description>
     <RepositoryUrl>https://github.com/letyshub/EbookLibrary</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,6 +46,10 @@
     <None Update="Properties\EbookLibrary.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>EbookLibrary.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 
