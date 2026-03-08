@@ -1,4 +1,4 @@
-﻿using Caliburn.Micro;
+using Caliburn.Micro;
 using EbookLibrary.Messages;
 using EbookLibrary.Models;
 using System.Collections.Generic;
@@ -9,16 +9,17 @@ namespace EbookLibrary.ViewModels
     {
         private readonly EbookModel model;
         private readonly IEventAggregator eventAggregator;
+        private readonly IFileService fileService;
         private string query;
         private IList<Ebook> ebooks;
-        private IFileService fileService;
+        private bool? readFilter = null;
 
         public ListViewModel(EbookModel model, IEventAggregator eventAggregator, IFileService fileService)
         {
             this.model = model;
             this.eventAggregator = eventAggregator;
             this.fileService = fileService;
-            this.Ebooks = this.model.GetLast(10);
+            LoadEbooks();
         }
 
         public IList<Ebook> Ebooks
@@ -26,7 +27,7 @@ namespace EbookLibrary.ViewModels
             get { return ebooks; }
             set
             {
-                this.ebooks = value;
+                ebooks = value;
                 NotifyOfPropertyChange(() => Ebooks);
             }
         }
@@ -36,29 +37,76 @@ namespace EbookLibrary.ViewModels
             get { return query; }
             set
             {
-                this.query = value;
+                query = value;
                 NotifyOfPropertyChange(() => Query);
             }
         }
 
+        public bool IsFilterAll => readFilter == null;
+        public bool IsFilterToRead => readFilter == false;
+        public bool IsFilterRead => readFilter == true;
+
         public void AddEbook()
         {
-            this.eventAggregator.PublishOnUIThread(new DisplayAddEbookViewMessage());
+            _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplayAddEbookViewMessage());
         }
 
         public void SearchEbook()
         {
-            this.Ebooks = string.IsNullOrEmpty(this.query) ? this.model.GetLast(25) : this.model.Get(this.query);
+            LoadEbooks();
+        }
+
+        public void ShowAll()
+        {
+            readFilter = null;
+            NotifyFilterProperties();
+            LoadEbooks();
+        }
+
+        public void ShowToRead()
+        {
+            readFilter = false;
+            NotifyFilterProperties();
+            LoadEbooks();
+        }
+
+        public void ShowRead()
+        {
+            readFilter = true;
+            NotifyFilterProperties();
+            LoadEbooks();
+        }
+
+        public void ToggleRead(Ebook ebook)
+        {
+            ebook.IsRead = !ebook.IsRead;
+            this.model.ToggleReadStatus(ebook.Id, ebook.IsRead);
+            LoadEbooks();
         }
 
         public void EditEbook(Ebook ebook)
         {
-            this.eventAggregator.PublishOnUIThread(new DisplayEditEbookViewMessage(ebook));
+            _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplayEditEbookViewMessage(ebook));
         }
 
         public void OpenEbook(Ebook ebook)
         {
             this.fileService.OpenFile(ebook.Path);
+        }
+
+        private void LoadEbooks()
+        {
+            if (string.IsNullOrEmpty(query))
+                Ebooks = readFilter.HasValue ? model.GetByReadStatus(readFilter.Value) : model.GetLast(25);
+            else
+                Ebooks = model.Get(query, readFilter);
+        }
+
+        private void NotifyFilterProperties()
+        {
+            NotifyOfPropertyChange(() => IsFilterAll);
+            NotifyOfPropertyChange(() => IsFilterToRead);
+            NotifyOfPropertyChange(() => IsFilterRead);
         }
     }
 }

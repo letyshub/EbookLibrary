@@ -24,20 +24,30 @@ namespace EbookLibrary.Models
             return this.dbService.GetLast(size);
         }
 
-        internal void Update(int id, string title, string author, List<string> tags)
+        public void Update(int id, string title, string author, List<string> tags, bool isRead, int priority)
         {
-            this.dbService.Update(id, title, author, tags);
+            this.dbService.Update(id, title, author, tags, isRead, priority);
         }
 
-        internal void Delete(int id, string path)
+        public void ToggleReadStatus(int id, bool isRead)
+        {
+            this.dbService.UpdateReadStatus(id, isRead);
+        }
+
+        public IList<Ebook> GetByReadStatus(bool isRead)
+        {
+            return this.dbService.GetByReadStatus(isRead);
+        }
+
+        public void Delete(int id, string path)
         {
             this.fileService.DeleteFile(path);
             this.dbService.Delete(id);
         }
 
-        internal IList<Ebook> Get(string query)
+        public IList<Ebook> Get(string query, bool? isRead = null)
         {
-            return this.dbService.GetByQuery(query);
+            return this.dbService.GetByQuery(query, isRead);
         }
     }
 }

@@ -13,12 +13,12 @@ namespace EbookLibrary.ViewModels
 
         public void Confirm()
         {
-            this.TryClose(true);
+            _ = TryCloseAsync(true);
         }
 
         public void Cancel()
         {
-            this.TryClose(false);
+            _ = TryCloseAsync(false);
         }
     }
 }

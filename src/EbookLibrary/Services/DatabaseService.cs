@@ -28,7 +28,7 @@ namespace EbookLibrary
             }
         }
 
-        public void Update(int id, string title, string author, List<string> tags)
+        public void Update(int id, string title, string author, List<string> tags, bool isRead, int priority)
         {
             using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
             {
@@ -37,6 +37,19 @@ namespace EbookLibrary
                 ebook.Title = title;
                 ebook.Author = author;
                 ebook.Tags = tags;
+                ebook.IsRead = isRead;
+                ebook.Priority = priority;
+                ebooks.Update(ebook);
+            }
+        }
+
+        public void UpdateReadStatus(int id, bool isRead)
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                var ebooks = db.GetCollection<Ebook>("ebooks");
+                var ebook = ebooks.FindById(id);
+                ebook.IsRead = isRead;
                 ebooks.Update(ebook);
             }
         }
@@ -50,15 +63,29 @@ namespace EbookLibrary
             }
         }
 
-        public List<Ebook> GetByQuery(string query)
+        public List<Ebook> GetByQuery(string query, bool? isRead = null)
         {
-            var keywords = query.Split(' ');
             using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
             {
                 var ebooks = db.GetCollection<Ebook>("ebooks");
-                return ebooks
-                        .Query()
-                        .Where(x => x.Title.Contains(query) || x.Author.Contains(query) || (x.Tags != null && x.Tags.Contains(query)))
+                var q = ebooks.Query()
+                        .Where(x => x.Title.Contains(query) || x.Author.Contains(query) || (x.Tags != null && x.Tags.Contains(query)));
+
+                if (isRead.HasValue)
+                    q = q.Where(x => x.IsRead == isRead.Value);
+
+                return q.ToList();
+            }
+        }
+
+        public List<Ebook> GetByReadStatus(bool isRead)
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                var ebooks = db.GetCollection<Ebook>("ebooks");
+                return ebooks.Query()
+                        .Where(x => x.IsRead == isRead)
+                        .OrderByDescending(x => x.Priority)
                         .ToList();
             }
         }

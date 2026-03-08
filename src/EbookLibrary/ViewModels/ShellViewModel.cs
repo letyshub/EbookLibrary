@@ -1,4 +1,6 @@
-﻿using Caliburn.Micro;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Caliburn.Micro;
 using EbookLibrary.Messages;
 
 namespace EbookLibrary.ViewModels
@@ -9,26 +11,26 @@ namespace EbookLibrary.ViewModels
 
         public ShellViewModel(IEventAggregator eventAggregator)
         {
-            ActivateItem(IoC.Get<ListViewModel>());
+            _ = ActivateItemAsync(IoC.Get<ListViewModel>(), CancellationToken.None);
             this.eventAggregator = eventAggregator;
             this.eventAggregator.Subscribe(this);
         }
 
-        public void Handle(DisplayAddEbookViewMessage message)
+        public async Task HandleAsync(DisplayAddEbookViewMessage message, CancellationToken cancellationToken)
         {
-            ActivateItem(IoC.Get<AddViewModel>());
+            await ActivateItemAsync(IoC.Get<AddViewModel>(), cancellationToken);
         }
 
-        public void Handle(DisplayListEbookViewMessage message)
+        public async Task HandleAsync(DisplayListEbookViewMessage message, CancellationToken cancellationToken)
         {
-            ActivateItem(IoC.Get<ListViewModel>());
+            await ActivateItemAsync(IoC.Get<ListViewModel>(), cancellationToken);
         }
 
-        public void Handle(DisplayEditEbookViewMessage message)
+        public async Task HandleAsync(DisplayEditEbookViewMessage message, CancellationToken cancellationToken)
         {
             var vm = IoC.Get<EditViewModel>();
             vm.SetEbook(message.Ebook);
-            ActivateItem(vm);
+            await ActivateItemAsync(vm, cancellationToken);
         }
     }
 }

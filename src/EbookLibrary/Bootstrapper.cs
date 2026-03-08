@@ -38,9 +38,9 @@ namespace EbookLibrary
                 .ForEach(modelType => this.container.RegisterPerRequest(modelType, modelType.ToString(), modelType));
         }
 
-        protected override void OnStartup(object sender, StartupEventArgs e)
+        protected override async void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<ShellViewModel>();
+            await DisplayRootViewForAsync<ShellViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)

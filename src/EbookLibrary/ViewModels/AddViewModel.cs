@@ -12,6 +12,8 @@ namespace EbookLibrary.ViewModels
         private string title;
         private string author;
         private string tags;
+        private bool isRead;
+        private int priority;
         private readonly EbookModel model;
         private readonly IEventAggregator eventAggregator;
         private readonly IFileService fileService;
@@ -54,6 +56,26 @@ namespace EbookLibrary.ViewModels
             }
         }
 
+        public bool IsRead
+        {
+            get { return isRead; }
+            set
+            {
+                this.isRead = value;
+                NotifyOfPropertyChange(() => IsRead);
+            }
+        }
+
+        public int Priority
+        {
+            get { return priority; }
+            set
+            {
+                this.priority = value;
+                NotifyOfPropertyChange(() => Priority);
+            }
+        }
+
         public string Path
         {
             get { return path; }
@@ -81,15 +103,17 @@ namespace EbookLibrary.ViewModels
                 Author = this.author,
                 Title = this.title,
                 Path = this.path,
-                Tags = this.tags?.Split(',').ToList()
+                Tags = this.tags?.Split(',').ToList(),
+                IsRead = this.isRead,
+                Priority = this.priority
             };
             this.model.Add(ebook);
-            this.eventAggregator.PublishOnUIThread(new DisplayListEbookViewMessage());
+            _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplayListEbookViewMessage());
         }
 
         public void Cancel()
         {
-            this.eventAggregator.PublishOnUIThread(new DisplayListEbookViewMessage());
+            _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplayListEbookViewMessage());
         }
 
         public void SelectFile()
