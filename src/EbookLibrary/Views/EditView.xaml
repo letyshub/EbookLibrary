@@ -75,23 +75,6 @@
                                  FontSize="16" Width="800" HorizontalAlignment="Left"/>
                     </StackPanel>
 
-                    <!-- Priority -->
-                    <StackPanel Orientation="Horizontal" Margin="0,12,0,4">
-                        <materialDesign:PackIcon Kind="Flag" Width="20" Height="20"
-                                                 VerticalAlignment="Bottom" Margin="0,0,8,4"
-                                                 Opacity="0.6"/>
-                        <ComboBox x:Name="Priority"
-                                  materialDesign:HintAssist.Hint="{DynamicResource String.Priority}"
-                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                                  FontSize="16" Width="300" HorizontalAlignment="Left"
-                                  SelectedValue="{Binding Priority}" SelectedValuePath="Tag">
-                            <ComboBoxItem Content="{DynamicResource String.PriorityNone}" Tag="0"/>
-                            <ComboBoxItem Content="{DynamicResource String.PriorityLow}" Tag="1"/>
-                            <ComboBoxItem Content="{DynamicResource String.PriorityMedium}" Tag="2"/>
-                            <ComboBoxItem Content="{DynamicResource String.PriorityHigh}" Tag="3"/>
-                        </ComboBox>
-                    </StackPanel>
-
                     <!-- IsRead -->
                     <StackPanel Orientation="Horizontal" Margin="0,16,0,4">
                         <materialDesign:PackIcon Kind="BookCheck" Width="20" Height="20"

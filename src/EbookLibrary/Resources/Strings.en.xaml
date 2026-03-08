@@ -43,6 +43,18 @@
     <sys:String x:Key="String.Yes">Yes</sys:String>
     <sys:String x:Key="String.DeleteConfirmation">Are you sure you want to delete this ebook?</sys:String>
 
+    <!-- Reading lists -->
+    <sys:String x:Key="String.ReadingLists">Reading Lists</sys:String>
+    <sys:String x:Key="String.AddToList">Add to list</sys:String>
+    <sys:String x:Key="String.NewListHint">New list name...</sys:String>
+    <sys:String x:Key="String.CreateList">Create</sys:String>
+    <sys:String x:Key="String.OpenList">Open list</sys:String>
+    <sys:String x:Key="String.AddBook">Add book</sys:String>
+    <sys:String x:Key="String.Add">Add</sys:String>
+    <sys:String x:Key="String.RemoveFromList">Remove from list</sys:String>
+    <sys:String x:Key="String.ChangePriority">Change priority</sys:String>
+    <sys:String x:Key="String.SearchBooksHint">Search books to add...</sys:String>
+
     <!-- Settings -->
     <sys:String x:Key="String.SettingsHeader">Settings</sys:String>
     <sys:String x:Key="String.Language">Language</sys:String>

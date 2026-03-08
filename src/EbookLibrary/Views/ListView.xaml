@@ -31,6 +31,12 @@
                         <materialDesign:PackIcon Kind="Cog" Width="24" Height="24"/>
                     </Button>
                     <Button Style="{StaticResource MaterialDesignIconForegroundButton}"
+                            cal:Message.Attach="ReadingLists"
+                            ToolTip="{DynamicResource String.ReadingLists}"
+                            Foreground="White">
+                        <materialDesign:PackIcon Kind="FormatListChecks" Width="24" Height="24"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignIconForegroundButton}"
                             cal:Message.Attach="AddEbook"
                             ToolTip="{DynamicResource String.AddEbook}"
                             Foreground="White">
@@ -156,6 +162,11 @@
                                                 ToolTip="{DynamicResource String.OpenEbook}"
                                                 Foreground="{DynamicResource PrimaryHueMidBrush}">
                                             <materialDesign:PackIcon Kind="BookOpenVariant" Width="20" Height="20"/>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignIconButton}"
+                                                cal:Message.Attach="[Event Click] = [Action AddToList($this)]"
+                                                ToolTip="{DynamicResource String.AddToList}">
+                                            <materialDesign:PackIcon Kind="BookmarkPlus" Width="18" Height="18"/>
                                         </Button>
                                         <Button Style="{StaticResource MaterialDesignIconButton}"
                                                 cal:Message.Attach="[Event Click] = [Action EditEbook($this)]"

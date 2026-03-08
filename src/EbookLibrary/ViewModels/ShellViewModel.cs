@@ -5,7 +5,14 @@ using EbookLibrary.Messages;
 
 namespace EbookLibrary.ViewModels
 {
-    public class ShellViewModel : Conductor<object>, IHandle<DisplayAddEbookViewMessage>, IHandle<DisplayListEbookViewMessage>, IHandle<DisplayEditEbookViewMessage>, IHandle<DisplaySettingsViewMessage>
+    public class ShellViewModel : Conductor<object>,
+        IHandle<DisplayAddEbookViewMessage>,
+        IHandle<DisplayListEbookViewMessage>,
+        IHandle<DisplayEditEbookViewMessage>,
+        IHandle<DisplaySettingsViewMessage>,
+        IHandle<DisplayReadingListsViewMessage>,
+        IHandle<DisplayReadingListDetailViewMessage>,
+        IHandle<DisplayAddToListViewMessage>
     {
         private readonly IEventAggregator eventAggregator;
 
@@ -36,6 +43,25 @@ namespace EbookLibrary.ViewModels
         public async Task HandleAsync(DisplaySettingsViewMessage message, CancellationToken cancellationToken)
         {
             await ActivateItemAsync(IoC.Get<SettingsViewModel>(), cancellationToken);
+        }
+
+        public async Task HandleAsync(DisplayReadingListsViewMessage message, CancellationToken cancellationToken)
+        {
+            await ActivateItemAsync(IoC.Get<ReadingListsViewModel>(), cancellationToken);
+        }
+
+        public async Task HandleAsync(DisplayReadingListDetailViewMessage message, CancellationToken cancellationToken)
+        {
+            var vm = IoC.Get<ReadingListDetailViewModel>();
+            vm.SetList(message.ReadingList);
+            await ActivateItemAsync(vm, cancellationToken);
+        }
+
+        public async Task HandleAsync(DisplayAddToListViewMessage message, CancellationToken cancellationToken)
+        {
+            var vm = IoC.Get<AddToListViewModel>();
+            vm.SetEbook(message.Ebook);
+            await ActivateItemAsync(vm, cancellationToken);
         }
     }
 }

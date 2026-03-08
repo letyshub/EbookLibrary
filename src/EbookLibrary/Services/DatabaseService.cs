@@ -1,6 +1,7 @@
 ﻿using EbookLibrary.Models;
 using LiteDB;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EbookLibrary
 {
@@ -69,7 +70,7 @@ namespace EbookLibrary
             {
                 var ebooks = db.GetCollection<Ebook>("ebooks");
                 var q = ebooks.Query()
-                        .Where(x => x.Title.Contains(query) || x.Author.Contains(query) || (x.Tags != null && x.Tags.Contains(query)));
+                        .Where(x => x.Title.Contains(query) || x.Author.Contains(query) || (x.Tags != null && x.Tags.Any(t => t.Contains(query))));
 
                 if (isRead.HasValue)
                     q = q.Where(x => x.IsRead == isRead.Value);
@@ -87,6 +88,81 @@ namespace EbookLibrary
                         .Where(x => x.IsRead == isRead)
                         .OrderByDescending(x => x.Priority)
                         .ToList();
+            }
+        }
+
+        public List<Ebook> GetAll()
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                return db.GetCollection<Ebook>("ebooks").FindAll().ToList();
+            }
+        }
+
+        public List<ReadingList> GetAllReadingLists()
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                return db.GetCollection<ReadingList>("readinglists").FindAll().ToList();
+            }
+        }
+
+        public ReadingList GetReadingList(int id)
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                return db.GetCollection<ReadingList>("readinglists").FindById(id);
+            }
+        }
+
+        public void AddReadingList(string name)
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                db.GetCollection<ReadingList>("readinglists").Insert(new ReadingList { Name = name });
+            }
+        }
+
+        public void DeleteReadingList(int id)
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                db.GetCollection<ReadingList>("readinglists").Delete(id);
+            }
+        }
+
+        public void AddToReadingList(int listId, int ebookId, int priority)
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                var lists = db.GetCollection<ReadingList>("readinglists");
+                var list = lists.FindById(listId);
+                if (list.Entries.Any(e => e.EbookId == ebookId)) return;
+                list.Entries.Add(new ReadingListEntry { EbookId = ebookId, Priority = priority });
+                lists.Update(list);
+            }
+        }
+
+        public void RemoveFromReadingList(int listId, int ebookId)
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                var lists = db.GetCollection<ReadingList>("readinglists");
+                var list = lists.FindById(listId);
+                list.Entries.RemoveAll(e => e.EbookId == ebookId);
+                lists.Update(list);
+            }
+        }
+
+        public void UpdateReadingListEntryPriority(int listId, int ebookId, int priority)
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                var lists = db.GetCollection<ReadingList>("readinglists");
+                var list = lists.FindById(listId);
+                var entry = list.Entries.FirstOrDefault(e => e.EbookId == ebookId);
+                if (entry != null) entry.Priority = priority;
+                lists.Update(list);
             }
         }
     }

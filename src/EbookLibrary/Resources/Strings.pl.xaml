@@ -43,6 +43,18 @@
     <sys:String x:Key="String.Yes">Tak</sys:String>
     <sys:String x:Key="String.DeleteConfirmation">Czy na pewno chcesz usunąć tego ebooka?</sys:String>
 
+    <!-- Reading lists -->
+    <sys:String x:Key="String.ReadingLists">Listy do przeczytania</sys:String>
+    <sys:String x:Key="String.AddToList">Dodaj do listy</sys:String>
+    <sys:String x:Key="String.NewListHint">Nazwa nowej listy...</sys:String>
+    <sys:String x:Key="String.CreateList">Utwórz</sys:String>
+    <sys:String x:Key="String.OpenList">Otwórz listę</sys:String>
+    <sys:String x:Key="String.AddBook">Dodaj książkę</sys:String>
+    <sys:String x:Key="String.Add">Dodaj</sys:String>
+    <sys:String x:Key="String.RemoveFromList">Usuń z listy</sys:String>
+    <sys:String x:Key="String.ChangePriority">Zmień priorytet</sys:String>
+    <sys:String x:Key="String.SearchBooksHint">Szukaj książek do dodania...</sys:String>
+
     <!-- Settings -->
     <sys:String x:Key="String.SettingsHeader">Ustawienia</sys:String>
     <sys:String x:Key="String.Language">Język</sys:String>

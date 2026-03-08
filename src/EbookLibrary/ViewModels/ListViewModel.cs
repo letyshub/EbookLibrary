@@ -56,6 +56,11 @@ namespace EbookLibrary.ViewModels
             _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplaySettingsViewMessage());
         }
 
+        public void ReadingLists()
+        {
+            _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplayReadingListsViewMessage());
+        }
+
         public void SearchEbook()
         {
             LoadEbooks();
@@ -92,6 +97,11 @@ namespace EbookLibrary.ViewModels
         public void EditEbook(Ebook ebook)
         {
             _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplayEditEbookViewMessage(ebook));
+        }
+
+        public void AddToList(Ebook ebook)
+        {
+            _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplayAddToListViewMessage(ebook));
         }
 
         public void OpenEbook(Ebook ebook)
