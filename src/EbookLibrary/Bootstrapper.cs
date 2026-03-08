@@ -1,9 +1,11 @@
 ﻿using Caliburn.Micro;
+using EbookLibrary.Helpers;
+using EbookLibrary.Services;
+using EbookLibrary.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using EbookLibrary.ViewModels;
 
 namespace EbookLibrary
 {
@@ -22,7 +24,8 @@ namespace EbookLibrary
                     .Singleton<IWindowManager, WindowManager>()
                     .Singleton<IEventAggregator, EventAggregator>()
                     .Singleton<IDatabaseService, DatabaseService>()
-                    .Singleton<IFileService, FileService>();
+                    .Singleton<IFileService, FileService>()
+                    .Singleton<ISettingsService, SettingsService>();
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
@@ -40,6 +43,9 @@ namespace EbookLibrary
 
         protected override async void OnStartup(object sender, StartupEventArgs e)
         {
+            var settings = this.container.GetInstance<ISettingsService>(null);
+            LocalizationHelper.ApplyLanguage(settings.Language);
+            ThemeHelper.ApplyTheme(settings.Theme);
             await DisplayRootViewForAsync<ShellViewModel>();
         }
 

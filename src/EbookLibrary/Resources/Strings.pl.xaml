@@ -1,0 +1,56 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- Main list -->
+    <sys:String x:Key="String.AppTitle">Ebook Library</sys:String>
+    <sys:String x:Key="String.AddEbook">Dodaj ebook</sys:String>
+    <sys:String x:Key="String.Settings">Ustawienia</sys:String>
+    <sys:String x:Key="String.Search">Szukaj</sys:String>
+    <sys:String x:Key="String.SearchHint">Szukaj po tytule, autorze lub tagach...</sys:String>
+    <sys:String x:Key="String.FilterAll">Wszystkie</sys:String>
+    <sys:String x:Key="String.FilterToRead">Do przeczytania</sys:String>
+    <sys:String x:Key="String.FilterRead">Przeczytane</sys:String>
+    <sys:String x:Key="String.ToggleReadTooltip">Oznacz jako przeczytaną / do przeczytania</sys:String>
+    <sys:String x:Key="String.OpenEbook">Otwórz ebook</sys:String>
+    <sys:String x:Key="String.Edit">Edytuj</sys:String>
+
+    <!-- Priority labels -->
+    <sys:String x:Key="String.PriorityLow">Niski</sys:String>
+    <sys:String x:Key="String.PriorityMedium">Średni</sys:String>
+    <sys:String x:Key="String.PriorityHigh">Wysoki</sys:String>
+
+    <!-- Add / Edit form -->
+    <sys:String x:Key="String.AddEbookHeader">Dodaj ebook</sys:String>
+    <sys:String x:Key="String.EditEbookHeader">Edytuj ebook</sys:String>
+    <sys:String x:Key="String.Title">Tytuł</sys:String>
+    <sys:String x:Key="String.Author">Autor</sys:String>
+    <sys:String x:Key="String.FilePath">Ścieżka do pliku</sys:String>
+    <sys:String x:Key="String.SelectFile">Wybierz plik</sys:String>
+    <sys:String x:Key="String.OpenFile">Otwórz ebook</sys:String>
+    <sys:String x:Key="String.Tags">Tagi (oddzielone przecinkiem)</sys:String>
+    <sys:String x:Key="String.Priority">Priorytet</sys:String>
+    <sys:String x:Key="String.PriorityNone">Brak</sys:String>
+    <sys:String x:Key="String.MarkAsRead">Oznacz jako przeczytaną</sys:String>
+    <sys:String x:Key="String.Cancel">Anuluj</sys:String>
+    <sys:String x:Key="String.Save">Zapisz</sys:String>
+    <sys:String x:Key="String.Delete">Usuń</sys:String>
+    <sys:String x:Key="String.Open">Otwórz</sys:String>
+
+    <!-- Confirmation dialog -->
+    <sys:String x:Key="String.ConfirmationTitle">Potwierdzenie</sys:String>
+    <sys:String x:Key="String.No">Nie</sys:String>
+    <sys:String x:Key="String.Yes">Tak</sys:String>
+    <sys:String x:Key="String.DeleteConfirmation">Czy na pewno chcesz usunąć tego ebooka?</sys:String>
+
+    <!-- Settings -->
+    <sys:String x:Key="String.SettingsHeader">Ustawienia</sys:String>
+    <sys:String x:Key="String.Language">Język</sys:String>
+    <sys:String x:Key="String.Polish">Polski</sys:String>
+    <sys:String x:Key="String.English">English</sys:String>
+    <sys:String x:Key="String.Theme">Motyw</sys:String>
+    <sys:String x:Key="String.ThemeLight">Jasny</sys:String>
+    <sys:String x:Key="String.ThemeDark">Ciemny</sys:String>
+    <sys:String x:Key="String.Back">Powrót</sys:String>
+
+</ResourceDictionary>

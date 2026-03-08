@@ -5,7 +5,7 @@ using EbookLibrary.Messages;
 
 namespace EbookLibrary.ViewModels
 {
-    public class ShellViewModel : Conductor<object>, IHandle<DisplayAddEbookViewMessage>, IHandle<DisplayListEbookViewMessage>, IHandle<DisplayEditEbookViewMessage>
+    public class ShellViewModel : Conductor<object>, IHandle<DisplayAddEbookViewMessage>, IHandle<DisplayListEbookViewMessage>, IHandle<DisplayEditEbookViewMessage>, IHandle<DisplaySettingsViewMessage>
     {
         private readonly IEventAggregator eventAggregator;
 
@@ -31,6 +31,11 @@ namespace EbookLibrary.ViewModels
             var vm = IoC.Get<EditViewModel>();
             vm.SetEbook(message.Ebook);
             await ActivateItemAsync(vm, cancellationToken);
+        }
+
+        public async Task HandleAsync(DisplaySettingsViewMessage message, CancellationToken cancellationToken)
+        {
+            await ActivateItemAsync(IoC.Get<SettingsViewModel>(), cancellationToken);
         }
     }
 }

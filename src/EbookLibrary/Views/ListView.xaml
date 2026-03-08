@@ -23,18 +23,25 @@
         <!-- Header -->
         <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0" Padding="16,14">
             <DockPanel>
-                <Button DockPanel.Dock="Right"
-                        Style="{StaticResource MaterialDesignIconForegroundButton}"
-                        cal:Message.Attach="AddEbook"
-                        ToolTip="Dodaj ebook"
-                        Foreground="White">
-                    <materialDesign:PackIcon Kind="BookPlus" Width="24" Height="24"/>
-                </Button>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button Style="{StaticResource MaterialDesignIconForegroundButton}"
+                            cal:Message.Attach="Settings"
+                            ToolTip="{DynamicResource String.Settings}"
+                            Foreground="White">
+                        <materialDesign:PackIcon Kind="Cog" Width="24" Height="24"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignIconForegroundButton}"
+                            cal:Message.Attach="AddEbook"
+                            ToolTip="{DynamicResource String.AddEbook}"
+                            Foreground="White">
+                        <materialDesign:PackIcon Kind="BookPlus" Width="24" Height="24"/>
+                    </Button>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="BookMultiple" Width="28" Height="28"
                                             VerticalAlignment="Center" Margin="0,0,10,0"
                                             Foreground="White"/>
-                    <TextBlock Text="Ebook Library" FontSize="20" FontWeight="Medium"
+                    <TextBlock Text="{DynamicResource String.AppTitle}" FontSize="20" FontWeight="Medium"
                                Foreground="White" VerticalAlignment="Center"/>
                 </StackPanel>
             </DockPanel>
@@ -48,13 +55,13 @@
                 <Button DockPanel.Dock="Right"
                         Style="{StaticResource MaterialDesignIconButton}"
                         cal:Message.Attach="SearchEbook"
-                        ToolTip="Szukaj">
+                        ToolTip="{DynamicResource String.Search}">
                     <materialDesign:PackIcon Kind="Magnify"/>
                 </Button>
                 <materialDesign:PackIcon Kind="Magnify" VerticalAlignment="Center"
                                          Margin="4,0,8,0" Opacity="0.45" Width="18" Height="18"/>
                 <TextBox x:Name="Query"
-                         materialDesign:HintAssist.Hint="Szukaj po tytule, autorze lub tagach..."
+                         materialDesign:HintAssist.Hint="{DynamicResource String.SearchHint}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" FontSize="14"
                          cal:Message.Attach="[Event KeyDown] = [Action SearchEbook()]"/>
@@ -73,7 +80,7 @@
                         <materialDesign:PackIcon Kind="Check" Width="14" Height="14"
                                                  VerticalAlignment="Center" Margin="0,0,4,0"
                                                  Visibility="{Binding IsFilterAll, Converter={StaticResource BoolToVis}}"/>
-                        <TextBlock Text="Wszystkie" VerticalAlignment="Center"/>
+                        <TextBlock Text="{DynamicResource String.FilterAll}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Button cal:Message.Attach="ShowToRead"
@@ -83,7 +90,7 @@
                         <materialDesign:PackIcon Kind="Check" Width="14" Height="14"
                                                  VerticalAlignment="Center" Margin="0,0,4,0"
                                                  Visibility="{Binding IsFilterToRead, Converter={StaticResource BoolToVis}}"/>
-                        <TextBlock Text="Do przeczytania" VerticalAlignment="Center"/>
+                        <TextBlock Text="{DynamicResource String.FilterToRead}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Button cal:Message.Attach="ShowRead"
@@ -93,7 +100,7 @@
                         <materialDesign:PackIcon Kind="Check" Width="14" Height="14"
                                                  VerticalAlignment="Center" Margin="0,0,4,0"
                                                  Visibility="{Binding IsFilterRead, Converter={StaticResource BoolToVis}}"/>
-                        <TextBlock Text="Przeczytane" VerticalAlignment="Center"/>
+                        <TextBlock Text="{DynamicResource String.FilterRead}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -128,7 +135,7 @@
                                         <!-- Toggle read/unread -->
                                         <Button Style="{StaticResource MaterialDesignIconButton}"
                                                 cal:Message.Attach="[Event Click] = [Action ToggleRead($this)]"
-                                                ToolTip="Oznacz jako przeczytaną / do przeczytania">
+                                                ToolTip="{DynamicResource String.ToggleReadTooltip}">
                                             <materialDesign:PackIcon Width="20" Height="20">
                                                 <materialDesign:PackIcon.Style>
                                                     <Style TargetType="materialDesign:PackIcon">
@@ -146,13 +153,13 @@
                                         </Button>
                                         <Button Style="{StaticResource MaterialDesignIconButton}"
                                                 cal:Message.Attach="[Event Click] = [Action OpenEbook($this)]"
-                                                ToolTip="Otwórz ebook"
+                                                ToolTip="{DynamicResource String.OpenEbook}"
                                                 Foreground="{DynamicResource PrimaryHueMidBrush}">
                                             <materialDesign:PackIcon Kind="BookOpenVariant" Width="20" Height="20"/>
                                         </Button>
                                         <Button Style="{StaticResource MaterialDesignIconButton}"
                                                 cal:Message.Attach="[Event Click] = [Action EditEbook($this)]"
-                                                ToolTip="Edytuj">
+                                                ToolTip="{DynamicResource String.Edit}">
                                             <materialDesign:PackIcon Kind="Pencil" Width="18" Height="18"/>
                                         </Button>
                                     </StackPanel>
@@ -219,15 +226,15 @@
                                                             <Style TargetType="TextBlock">
                                                                 <Style.Triggers>
                                                                     <DataTrigger Binding="{Binding Priority}" Value="1">
-                                                                        <Setter Property="Text" Value="Niski"/>
+                                                                        <Setter Property="Text" Value="{DynamicResource String.PriorityLow}"/>
                                                                         <Setter Property="Foreground" Value="#2E7D32"/>
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding Priority}" Value="2">
-                                                                        <Setter Property="Text" Value="Średni"/>
+                                                                        <Setter Property="Text" Value="{DynamicResource String.PriorityMedium}"/>
                                                                         <Setter Property="Foreground" Value="#E65100"/>
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding Priority}" Value="3">
-                                                                        <Setter Property="Text" Value="Wysoki"/>
+                                                                        <Setter Property="Text" Value="{DynamicResource String.PriorityHigh}"/>
                                                                         <Setter Property="Foreground" Value="#C62828"/>
                                                                     </DataTrigger>
                                                                 </Style.Triggers>

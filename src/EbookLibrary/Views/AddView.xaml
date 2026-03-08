@@ -22,7 +22,7 @@
                 <materialDesign:PackIcon Kind="BookPlus" Width="26" Height="26"
                                          VerticalAlignment="Center" Margin="0,0,10,0"
                                          Foreground="White"/>
-                <TextBlock Text="Dodaj ebook" FontSize="20" FontWeight="Medium"
+                <TextBlock Text="{DynamicResource String.AddEbookHeader}" FontSize="20" FontWeight="Medium"
                            Foreground="White" VerticalAlignment="Center"/>
             </StackPanel>
         </materialDesign:ColorZone>
@@ -37,7 +37,7 @@
                                                  VerticalAlignment="Bottom" Margin="0,0,8,4"
                                                  Opacity="0.6"/>
                         <TextBox x:Name="Title"
-                                 materialDesign:HintAssist.Hint="Tytuł"
+                                 materialDesign:HintAssist.Hint="{DynamicResource String.Title}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  FontSize="16" Width="800" HorizontalAlignment="Left">
                             <TextBox.Text>
@@ -58,7 +58,7 @@
                                                  VerticalAlignment="Bottom" Margin="0,0,8,4"
                                                  Opacity="0.6"/>
                         <TextBox x:Name="Author"
-                                 materialDesign:HintAssist.Hint="Autor"
+                                 materialDesign:HintAssist.Hint="{DynamicResource String.Author}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  FontSize="16" Width="800" HorizontalAlignment="Left"/>
                     </StackPanel>
@@ -69,7 +69,7 @@
                                                  VerticalAlignment="Bottom" Margin="0,0,8,4"
                                                  Opacity="0.6"/>
                         <TextBox x:Name="Path"
-                                 materialDesign:HintAssist.Hint="Ścieżka do pliku"
+                                 materialDesign:HintAssist.Hint="{DynamicResource String.FilePath}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  FontSize="16" Width="700">
                             <TextBox.Text>
@@ -85,12 +85,12 @@
                         </TextBox>
                         <Button cal:Message.Attach="SelectFile"
                                 Style="{StaticResource MaterialDesignIconButton}"
-                                ToolTip="Wybierz plik" Margin="4,0,0,0">
+                                ToolTip="{DynamicResource String.SelectFile}" Margin="4,0,0,0">
                             <materialDesign:PackIcon Kind="FolderOpen" Width="20" Height="20"/>
                         </Button>
                         <Button cal:Message.Attach="OpenFile"
                                 Style="{StaticResource MaterialDesignIconButton}"
-                                ToolTip="Otwórz ebook" Cursor="Hand">
+                                ToolTip="{DynamicResource String.OpenFile}" Cursor="Hand">
                             <materialDesign:PackIcon Kind="BookOpenVariant" Width="20" Height="20"/>
                         </Button>
                     </StackPanel>
@@ -101,7 +101,7 @@
                                                  VerticalAlignment="Bottom" Margin="0,0,8,4"
                                                  Opacity="0.6"/>
                         <TextBox x:Name="Tags"
-                                 materialDesign:HintAssist.Hint="Tagi (oddzielone przecinkiem)"
+                                 materialDesign:HintAssist.Hint="{DynamicResource String.Tags}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  FontSize="16" Width="800" HorizontalAlignment="Left"/>
                     </StackPanel>
@@ -112,14 +112,14 @@
                                                  VerticalAlignment="Bottom" Margin="0,0,8,4"
                                                  Opacity="0.6"/>
                         <ComboBox x:Name="Priority"
-                                  materialDesign:HintAssist.Hint="Priorytet"
+                                  materialDesign:HintAssist.Hint="{DynamicResource String.Priority}"
                                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                   FontSize="16" Width="300" HorizontalAlignment="Left"
                                   SelectedValue="{Binding Priority}" SelectedValuePath="Tag">
-                            <ComboBoxItem Content="Brak" Tag="0"/>
-                            <ComboBoxItem Content="Niski" Tag="1"/>
-                            <ComboBoxItem Content="Średni" Tag="2"/>
-                            <ComboBoxItem Content="Wysoki" Tag="3"/>
+                            <ComboBoxItem Content="{DynamicResource String.PriorityNone}" Tag="0"/>
+                            <ComboBoxItem Content="{DynamicResource String.PriorityLow}" Tag="1"/>
+                            <ComboBoxItem Content="{DynamicResource String.PriorityMedium}" Tag="2"/>
+                            <ComboBoxItem Content="{DynamicResource String.PriorityHigh}" Tag="3"/>
                         </ComboBox>
                     </StackPanel>
 
@@ -129,7 +129,7 @@
                                                  VerticalAlignment="Center" Margin="0,0,8,0"
                                                  Opacity="0.6"/>
                         <CheckBox x:Name="IsRead"
-                                  Content="Oznacz jako przeczytaną"
+                                  Content="{DynamicResource String.MarkAsRead}"
                                   IsChecked="{Binding IsRead}"
                                   FontSize="14"
                                   Style="{StaticResource MaterialDesignCheckBox}"/>
@@ -150,7 +150,7 @@
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ArrowLeft" Width="16" Height="16"
                                                  VerticalAlignment="Center" Margin="0,0,6,0"/>
-                        <TextBlock Text="Anuluj" VerticalAlignment="Center"/>
+                        <TextBlock Text="{DynamicResource String.Cancel}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Button x:Name="Save"
@@ -159,7 +159,7 @@
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ContentSave" Width="16" Height="16"
                                                  VerticalAlignment="Center" Margin="0,0,6,0"/>
-                        <TextBlock Text="Zapisz" VerticalAlignment="Center"/>
+                        <TextBlock Text="{DynamicResource String.Save}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

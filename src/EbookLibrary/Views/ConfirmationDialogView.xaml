@@ -14,7 +14,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Potwierdzenie"
+        Title="{DynamicResource String.ConfirmationTitle}"
         Height="180" Width="460"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -41,7 +41,7 @@
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Close" Width="16" Height="16"
                                              VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <TextBlock Text="Nie" VerticalAlignment="Center"/>
+                    <TextBlock Text="{DynamicResource String.No}" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
             <Button cal:Message.Attach="Confirm"
@@ -51,7 +51,7 @@
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Check" Width="16" Height="16"
                                              VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <TextBlock Text="Tak" VerticalAlignment="Center"/>
+                    <TextBlock Text="{DynamicResource String.Yes}" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
         </StackPanel>

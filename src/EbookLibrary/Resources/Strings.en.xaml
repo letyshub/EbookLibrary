@@ -1,0 +1,56 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- Main list -->
+    <sys:String x:Key="String.AppTitle">Ebook Library</sys:String>
+    <sys:String x:Key="String.AddEbook">Add Ebook</sys:String>
+    <sys:String x:Key="String.Settings">Settings</sys:String>
+    <sys:String x:Key="String.Search">Search</sys:String>
+    <sys:String x:Key="String.SearchHint">Search by title, author or tags...</sys:String>
+    <sys:String x:Key="String.FilterAll">All</sys:String>
+    <sys:String x:Key="String.FilterToRead">To Read</sys:String>
+    <sys:String x:Key="String.FilterRead">Read</sys:String>
+    <sys:String x:Key="String.ToggleReadTooltip">Mark as read / unread</sys:String>
+    <sys:String x:Key="String.OpenEbook">Open Ebook</sys:String>
+    <sys:String x:Key="String.Edit">Edit</sys:String>
+
+    <!-- Priority labels -->
+    <sys:String x:Key="String.PriorityLow">Low</sys:String>
+    <sys:String x:Key="String.PriorityMedium">Medium</sys:String>
+    <sys:String x:Key="String.PriorityHigh">High</sys:String>
+
+    <!-- Add / Edit form -->
+    <sys:String x:Key="String.AddEbookHeader">Add Ebook</sys:String>
+    <sys:String x:Key="String.EditEbookHeader">Edit Ebook</sys:String>
+    <sys:String x:Key="String.Title">Title</sys:String>
+    <sys:String x:Key="String.Author">Author</sys:String>
+    <sys:String x:Key="String.FilePath">File Path</sys:String>
+    <sys:String x:Key="String.SelectFile">Select File</sys:String>
+    <sys:String x:Key="String.OpenFile">Open Ebook</sys:String>
+    <sys:String x:Key="String.Tags">Tags (comma separated)</sys:String>
+    <sys:String x:Key="String.Priority">Priority</sys:String>
+    <sys:String x:Key="String.PriorityNone">None</sys:String>
+    <sys:String x:Key="String.MarkAsRead">Mark as Read</sys:String>
+    <sys:String x:Key="String.Cancel">Cancel</sys:String>
+    <sys:String x:Key="String.Save">Save</sys:String>
+    <sys:String x:Key="String.Delete">Delete</sys:String>
+    <sys:String x:Key="String.Open">Open</sys:String>
+
+    <!-- Confirmation dialog -->
+    <sys:String x:Key="String.ConfirmationTitle">Confirmation</sys:String>
+    <sys:String x:Key="String.No">No</sys:String>
+    <sys:String x:Key="String.Yes">Yes</sys:String>
+    <sys:String x:Key="String.DeleteConfirmation">Are you sure you want to delete this ebook?</sys:String>
+
+    <!-- Settings -->
+    <sys:String x:Key="String.SettingsHeader">Settings</sys:String>
+    <sys:String x:Key="String.Language">Language</sys:String>
+    <sys:String x:Key="String.Polish">Polish</sys:String>
+    <sys:String x:Key="String.English">English</sys:String>
+    <sys:String x:Key="String.Theme">Theme</sys:String>
+    <sys:String x:Key="String.ThemeLight">Light</sys:String>
+    <sys:String x:Key="String.ThemeDark">Dark</sys:String>
+    <sys:String x:Key="String.Back">Back</sys:String>
+
+</ResourceDictionary>

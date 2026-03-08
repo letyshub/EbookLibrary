@@ -51,6 +51,11 @@ namespace EbookLibrary.ViewModels
             _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplayAddEbookViewMessage());
         }
 
+        public void Settings()
+        {
+            _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplaySettingsViewMessage());
+        }
+
         public void SearchEbook()
         {
             LoadEbooks();

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Windows;
 using Caliburn.Micro;
 using EbookLibrary.Messages;
 using EbookLibrary.Models;
@@ -114,7 +115,9 @@ namespace EbookLibrary.ViewModels
 
         public async Task Delete()
         {
-            var confirmVm = new ConfirmationDialogViewModel("Are you sure you want to delete this ebook?");
+            var message = Application.Current.Resources["String.DeleteConfirmation"] as string
+                          ?? "Are you sure you want to delete this ebook?";
+            var confirmVm = new ConfirmationDialogViewModel(message);
             var result = await this.windowManager.ShowDialogAsync(confirmVm);
 
             if (result == true)
