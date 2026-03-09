@@ -6,6 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Ebook Library"
+        Icon="pack://application:,,,/app.ico"
         Height="680" Width="960"
         MinHeight="500" MinWidth="720"
         ResizeMode="CanResize"

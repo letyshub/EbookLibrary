@@ -1,8 +1,10 @@
 ﻿using Caliburn.Micro;
 using EbookLibrary.Messages;
 using EbookLibrary.Models;
+using EbookLibrary.Services;
 using Microsoft.Win32;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EbookLibrary.ViewModels
 {
@@ -12,17 +14,18 @@ namespace EbookLibrary.ViewModels
         private string title;
         private string author;
         private string tags;
-        private bool isRead;
-        private int priority;
+        private bool isLoading;
         private readonly EbookModel model;
         private readonly IEventAggregator eventAggregator;
         private readonly IFileService fileService;
+        private readonly IMetadataService metadataService;
 
-        public AddViewModel(EbookModel model, IEventAggregator eventAggregator, IFileService fileService)
+        public AddViewModel(EbookModel model, IEventAggregator eventAggregator, IFileService fileService, IMetadataService metadataService)
         {
             this.model = model;
             this.eventAggregator = eventAggregator;
             this.fileService = fileService;
+            this.metadataService = metadataService;
         }
 
         public string Title
@@ -56,26 +59,6 @@ namespace EbookLibrary.ViewModels
             }
         }
 
-        public bool IsRead
-        {
-            get { return isRead; }
-            set
-            {
-                this.isRead = value;
-                NotifyOfPropertyChange(() => IsRead);
-            }
-        }
-
-        public int Priority
-        {
-            get { return priority; }
-            set
-            {
-                this.priority = value;
-                NotifyOfPropertyChange(() => Priority);
-            }
-        }
-
         public string Path
         {
             get { return path; }
@@ -85,6 +68,12 @@ namespace EbookLibrary.ViewModels
                 NotifyOfPropertyChange(() => Path);
                 NotifyOfPropertyChange(() => CanSave);
             }
+        }
+
+        public bool IsLoading
+        {
+            get => isLoading;
+            private set { isLoading = value; NotifyOfPropertyChange(() => IsLoading); }
         }
 
         public bool CanSave
@@ -103,9 +92,7 @@ namespace EbookLibrary.ViewModels
                 Author = this.author,
                 Title = this.title,
                 Path = this.path,
-                Tags = this.tags?.Split(',').ToList(),
-                IsRead = this.isRead,
-                Priority = this.priority
+                Tags = this.tags?.Split(',').ToList()
             };
             this.model.Add(ebook);
             _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplayListEbookViewMessage());
@@ -116,14 +103,21 @@ namespace EbookLibrary.ViewModels
             _ = this.eventAggregator.PublishOnUIThreadAsync(new DisplayListEbookViewMessage());
         }
 
-        public void SelectFile()
+        public async void SelectFile()
         {
             var fd = new OpenFileDialog();
-            fd.Filter = "Ebook files|*.pdf;*.epub;*mobi|All files (*.*)|*.*";
+            fd.Filter = "Ebook files|*.pdf;*.epub;*.mobi|All files (*.*)|*.*";
             var result = fd.ShowDialog();
             if (result.Value)
             {
                 this.Path = fd.FileName;
+                IsLoading = true;
+                var meta = await Task.Run(() => this.metadataService.Extract(fd.FileName));
+                IsLoading = false;
+                if (string.IsNullOrWhiteSpace(this.Title) && !string.IsNullOrWhiteSpace(meta.Title))
+                    this.Title = meta.Title;
+                if (string.IsNullOrWhiteSpace(this.Author) && !string.IsNullOrWhiteSpace(meta.Author))
+                    this.Author = meta.Author;
             }
         }
 

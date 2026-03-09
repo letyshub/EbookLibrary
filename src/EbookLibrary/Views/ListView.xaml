@@ -18,6 +18,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
@@ -113,7 +114,7 @@
         </Border>
 
         <!-- Book list -->
-        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
             <ItemsControl ItemsSource="{Binding Ebooks}" Margin="16,10,16,16">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -289,5 +290,16 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+
+        <!-- Status bar -->
+        <Border Grid.Row="4"
+                BorderThickness="0,1,0,0"
+                BorderBrush="{DynamicResource MaterialDesignDivider}"
+                Background="{DynamicResource MaterialDesignToolBarBackground}"
+                Padding="16,5">
+            <TextBlock Text="{Binding CountInfo}"
+                       FontSize="12" Opacity="0.55"
+                       HorizontalAlignment="Right"/>
+        </Border>
     </Grid>
 </UserControl>

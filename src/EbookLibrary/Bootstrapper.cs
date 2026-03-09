@@ -25,7 +25,8 @@ namespace EbookLibrary
                     .Singleton<IEventAggregator, EventAggregator>()
                     .Singleton<IDatabaseService, DatabaseService>()
                     .Singleton<IFileService, FileService>()
-                    .Singleton<ISettingsService, SettingsService>();
+                    .Singleton<ISettingsService, SettingsService>()
+                    .Singleton<IMetadataService, MetadataService>();
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)

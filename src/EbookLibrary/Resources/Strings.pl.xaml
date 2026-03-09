@@ -32,6 +32,7 @@
     <sys:String x:Key="String.Priority">Priorytet</sys:String>
     <sys:String x:Key="String.PriorityNone">Brak</sys:String>
     <sys:String x:Key="String.MarkAsRead">Oznacz jako przeczytaną</sys:String>
+    <sys:String x:Key="String.ReadingMetadata">Wczytuję metadane...</sys:String>
     <sys:String x:Key="String.Cancel">Anuluj</sys:String>
     <sys:String x:Key="String.Save">Zapisz</sys:String>
     <sys:String x:Key="String.Delete">Usuń</sys:String>

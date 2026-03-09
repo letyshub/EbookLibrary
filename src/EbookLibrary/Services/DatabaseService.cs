@@ -64,6 +64,14 @@ namespace EbookLibrary
             }
         }
 
+        public int Count()
+        {
+            using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))
+            {
+                return db.GetCollection<Ebook>("ebooks").Count();
+            }
+        }
+
         public List<Ebook> GetByQuery(string query, bool? isRead = null)
         {
             using (var db = new LiteDatabase(Properties.EbookLibrary.Default.ConnectionString))

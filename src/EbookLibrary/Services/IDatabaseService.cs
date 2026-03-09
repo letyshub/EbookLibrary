@@ -13,6 +13,7 @@ namespace EbookLibrary
         void Update(int id, string title, string author, List<string> tags, bool isRead, int priority);
         void UpdateReadStatus(int id, bool isRead);
         void Delete(int id);
+        int Count();
 
         List<ReadingList> GetAllReadingLists();
         ReadingList GetReadingList(int id);

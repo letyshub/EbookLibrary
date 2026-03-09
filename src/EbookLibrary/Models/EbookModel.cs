@@ -49,5 +49,10 @@ namespace EbookLibrary.Models
         {
             return this.dbService.GetByQuery(query, isRead);
         }
+
+        public int GetCount()
+        {
+            return this.dbService.Count();
+        }
     }
 }

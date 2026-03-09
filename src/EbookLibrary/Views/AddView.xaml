@@ -9,6 +9,9 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d"
              d:DesignHeight="680" d:DesignWidth="960">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -106,37 +109,25 @@
                                  FontSize="16" Width="800" HorizontalAlignment="Left"/>
                     </StackPanel>
 
-                    <!-- Priority -->
-                    <StackPanel Orientation="Horizontal" Margin="0,12,0,4">
-                        <materialDesign:PackIcon Kind="Flag" Width="20" Height="20"
-                                                 VerticalAlignment="Bottom" Margin="0,0,8,4"
-                                                 Opacity="0.6"/>
-                        <ComboBox x:Name="Priority"
-                                  materialDesign:HintAssist.Hint="{DynamicResource String.Priority}"
-                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                                  FontSize="16" Width="300" HorizontalAlignment="Left"
-                                  SelectedValue="{Binding Priority}" SelectedValuePath="Tag">
-                            <ComboBoxItem Content="{DynamicResource String.PriorityNone}" Tag="0"/>
-                            <ComboBoxItem Content="{DynamicResource String.PriorityLow}" Tag="1"/>
-                            <ComboBoxItem Content="{DynamicResource String.PriorityMedium}" Tag="2"/>
-                            <ComboBoxItem Content="{DynamicResource String.PriorityHigh}" Tag="3"/>
-                        </ComboBox>
-                    </StackPanel>
-
-                    <!-- IsRead -->
-                    <StackPanel Orientation="Horizontal" Margin="0,16,0,4">
-                        <materialDesign:PackIcon Kind="BookCheck" Width="20" Height="20"
-                                                 VerticalAlignment="Center" Margin="0,0,8,0"
-                                                 Opacity="0.6"/>
-                        <CheckBox x:Name="IsRead"
-                                  Content="{DynamicResource String.MarkAsRead}"
-                                  IsChecked="{Binding IsRead}"
-                                  FontSize="14"
-                                  Style="{StaticResource MaterialDesignCheckBox}"/>
-                    </StackPanel>
                 </StackPanel>
             </materialDesign:Card>
         </ScrollViewer>
+
+        <!-- Metadata loading overlay -->
+        <Grid Grid.Row="1"
+              Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}">
+            <Border Background="{DynamicResource MaterialDesignPaper}" Opacity="0.82"/>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                             IsIndeterminate="True"
+                             Width="48" Height="48"
+                             HorizontalAlignment="Center"/>
+                <TextBlock Text="{DynamicResource String.ReadingMetadata}"
+                           Margin="0,12,0,0"
+                           HorizontalAlignment="Center"
+                           Opacity="0.7" FontSize="13"/>
+            </StackPanel>
+        </Grid>
 
         <!-- Action buttons -->
         <Border Grid.Row="2"

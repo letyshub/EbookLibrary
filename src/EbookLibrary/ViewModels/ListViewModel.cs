@@ -13,6 +13,7 @@ namespace EbookLibrary.ViewModels
         private string query;
         private IList<Ebook> ebooks;
         private bool? readFilter = null;
+        private int totalCount;
 
         public ListViewModel(EbookModel model, IEventAggregator eventAggregator, IFileService fileService)
         {
@@ -41,6 +42,14 @@ namespace EbookLibrary.ViewModels
                 NotifyOfPropertyChange(() => Query);
             }
         }
+
+        public int TotalCount
+        {
+            get => totalCount;
+            private set { totalCount = value; NotifyOfPropertyChange(() => TotalCount); }
+        }
+
+        public string CountInfo => $"{ebooks?.Count ?? 0} / {totalCount}";
 
         public bool IsFilterAll => readFilter == null;
         public bool IsFilterToRead => readFilter == false;
@@ -115,6 +124,9 @@ namespace EbookLibrary.ViewModels
                 Ebooks = readFilter.HasValue ? model.GetByReadStatus(readFilter.Value) : model.GetLast(25);
             else
                 Ebooks = model.Get(query, readFilter);
+
+            TotalCount = model.GetCount();
+            NotifyOfPropertyChange(() => CountInfo);
         }
 
         private void NotifyFilterProperties()
