@@ -1,0 +1,65 @@
+# This workflow will build, test, and publish a WPF desktop application
+# built on .NET 8.
+
+name: .NET Core Desktop
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: EbookLibrary.sln
+      Test_Project_Path: tests\EbookLibrary.Tests\EbookLibrary.Tests.csproj
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    # Restore NuGet packages
+    - name: Restore the application
+      run: dotnet restore $env:Solution_Name
+
+    # Build the solution
+    - name: Build the application
+      run: dotnet build $env:Solution_Name --configuration $env:Configuration --no-restore
+      env:
+        Configuration: ${{ matrix.configuration }}
+
+    # Execute all unit tests in the solution
+    - name: Execute unit tests
+      run: dotnet test $env:Test_Project_Path --configuration $env:Configuration --no-build --verbosity normal
+      env:
+        Configuration: ${{ matrix.configuration }}
+
+    # Publish the application (Release only)
+    - name: Publish the application
+      if: matrix.configuration == 'Release'
+      run: dotnet publish src\EbookLibrary\EbookLibrary.csproj --configuration Release --no-build --output publish\win-x64 --runtime win-x64 --self-contained false
+
+    # Upload build artifacts (Release only)
+    - name: Upload build artifacts
+      if: matrix.configuration == 'Release'
+      uses: actions/upload-artifact@v4
+      with:
+        name: EbookLibrary-win-x64
+        path: publish\win-x64
